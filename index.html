@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Surf Soul · Lineup</title>
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #0b1a2a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    /* Container principal – simula um dispositivo mobile / tablet */
+    .app {
+      max-width: 480px;
+      width: 100%;
+      background: #0f212f;
+      border-radius: 36px 36px 28px 28px;
+      box-shadow: 0 25px 40px -10px rgba(0,0,0,0.7);
+      overflow: hidden;
+      padding: 20px 18px 28px;
+      color: #eaf2f7;
+      transition: all 0.2s;
+      border: 1px solid #2d4b5e;
+    }
+
+    /* cabeçalho */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 0 4px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #b3e5ff, #6ab0e6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header h1 i {
+      margin-right: 8px;
+      color: #47b5ff;
+      -webkit-text-fill-color: #47b5ff;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 16px;
+      font-size: 20px;
+      color: #85b9d9;
+    }
+
+    .header-icons i {
+      transition: 0.2s;
+      cursor: default;
+    }
+
+    .header-icons i:hover { color: #b3e5ff; }
+
+    /* perfil do surfista */
+    .surfista-card {
+      background: #1a3242;
+      border-radius: 28px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+      border: 1px solid #2e4b5e;
+    }
+
+    .surfista-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .surfista-nome {
+      font-weight: 700;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .surfista-nome i {
+      color: #f7c948;
+      font-size: 16px;
+    }
+
+    .surfista-ranking {
+      font-size: 14px;
+      color: #aac7dd;
+      margin-top: 2px;
+    }
+
+    .surfista-ranking span {
+      color: #7bcb7b;
+      font-weight: 600;
+    }
+
+    .surfista-xp {
+      background: #1f3f52;
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid #3b637b;
+    }
+
+    .surfista-xp i {
+      color: #f7c948;
+      margin-right: 6px;
+    }
+
+    /* carreira temporada */
+    .carreira-box {
+      background: #1a3242;
+      border-radius: 20px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #2e4b5e;
+    }
+
+    .carreira-label {
+      font-size: 14px;
+      color: #b0cfdf;
+      letter-spacing: 0.3px;
+    }
+
+    .carreira-rank {
+      background: #112a38;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid #3e6a82;
+    }
+
+    .carreira-rank i {
+      color: #f7c948;
+      margin-right: 6px;
+    }
+
+    .carreira-pontos {
+      color: #b3e5ff;
+      font-weight: 500;
+    }
+
+    /* botões ação */
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      flex: 1;
+      background: #1f4055;
+      border: none;
+      padding: 12px 0;
+      border-radius: 40px;
+      color: #d6edff;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.15s;
+      border: 1px solid #356277;
+      box-shadow: 0 4px 0 #0b1d2b;
+    }
+
+    .btn i { color: #60b0e6; }
+    .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #0b1d2b; }
+    .btn-primary {
+      background: #2f7ea8;
+      border-color: #4b9ac9;
+      color: white;
+      box-shadow: 0 4px 0 #1b4b66;
+    }
+    .btn-primary i { color: white; }
+
+    /* local e condições */
+    .local-card {
+      background: #1a3242;
+      border-radius: 24px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid #2e4b5e;
+    }
+
+    .local-titulo {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #b0cfdf;
+      margin-bottom: 10px;
+    }
+
+    .local-titulo i { color: #f7c948; margin-right: 6px; }
+
+    .condicoes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0 10px;
+      font-size: 13px;
+    }
+
+    .cond-item {
+      background: #102b3b;
+      padding: 6px 4px;
+      border-radius: 40px;
+      text-align: center;
+      border: 1px solid #2c5065;
+    }
+
+    .cond-item i { margin-right: 4px; color: #60b0e6; }
+    .cond-item strong { font-weight: 600; display: block; font-size: 16px; color: white; }
+
+    .link-ver {
+      text-align: right;
+      font-size: 13px;
+      color: #79bce6;
+      cursor: default;
+    }
+
+    /* modos */
+    .modos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0 20px;
+    }
+
+    .modo-item {
+      background: #152d3d;
+      border-radius: 18px;
+      padding: 14px 10px;
+      border-left: 4px solid #47b5ff;
+      transition: 0.1s;
+      border: 1px solid #2c4f64;
+      cursor: pointer;
+    }
+
+    .modo-item:active { background: #1e4057; }
+
+    .modo-item h4 {
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modo-item p {
+      font-size: 11px;
+      color: #a0c4db;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    /* prancha */
+    .prancha-card {
+      background: #1a3242;
+      border-radius: 24px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border: 1px solid #2e4b5e;
+    }
+
+    .prancha-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .prancha-atributos {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: #b0cfdf;
+    }
+
+    .prancha-atributos span {
+      background: #0f2a3a;
+      padding: 4px 12px;
+      border-radius: 30px;
+      border: 1px solid #2a4d62;
+    }
+
+    .prancha-atributos i { margin-right: 4px; color: #f7c948; }
+
+    /* desafios */
+    .desafios {
+      background: #1a3242;
+      border-radius: 24px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border: 1px solid #2e4b5e;
+    }
+
+    .desafio-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #2a4b60;
+    }
+
+    .desafio-item:last-child { border-bottom: none; }
+
+    .desafio-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .desafio-nome {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .desafio-progresso {
+      font-size: 12px;
+      color: #aac7dd;
+    }
+
+    .desafio-xp {
+      background: #2d5a72;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* noticias */
+    .noticias {
+      background: #1a3242;
+      border-radius: 24px;
+      padding: 12px 16px;
+      border: 1px solid #2e4b5e;
+      margin-bottom: 8px;
+    }
+
+    .noticia {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #2a4b60;
+    }
+
+    .noticia:last-child { border-bottom: none; }
+
+    .noticia-titulo {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .noticia-link {
+      color: #79bce6;
+      font-size: 13px;
+      cursor: default;
+    }
+
+    .rodape-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #7ba3bd;
+    }
+
+    .rodape-links i { margin-right: 4px; }
+
+    /* pequenos ajustes */
+    .text-muted { color: #8bb3cc; }
+    .flex { display: flex; align-items: center; gap: 6px; }
+    .mb-1 { margin-bottom: 6px; }
+
+    @media (max-width: 400px) {
+      .condicoes-grid { grid-template-columns: repeat(2, 1fr); }
+      .modos-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h1><i class="fas fa-water"></i> SURF SOUL</h1>
+      <div class="header-icons">
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-user-circle"></i>
+      </div>
+    </div>
+
+    <!-- SURFISTA -->
+    <div class="surfista-card">
+      <div class="surfista-info">
+        <div class="surfista-nome">
+          MARCOSO SOUL <i class="fas fa-check-circle" style="color:#47b5ff;"></i>
+        </div>
+        <div class="surfista-ranking">
+          <i class="fas fa-globe-americas"></i> RANKING MUNDIAL #1.248 <span>↑ 85</span>
+        </div>
+      </div>
+      <div class="surfista-xp">
+        <i class="fas fa-star"></i> 8.450 / 12.000 XP
+      </div>
+    </div>
+
+    <!-- CARREIRA -->
+    <div class="carreira-box">
+      <div>
+        <div class="carreira-label"><i class="fas fa-trophy"></i> CARREIRA · TEMPORADA 2024</div>
+        <div style="display:flex; gap: 16px; margin-top: 4px;">
+          <span class="carreira-rank"><i class="fas fa-sort-up"></i> #12 ↑3</span>
+          <span class="carreira-pontos"><i class="fas fa-chart-line"></i> 12.450 pts</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <span style="background:#1c4056; padding:4px 10px; border-radius:30px; font-size:12px;"><i class="fas fa-tag"></i> ALÇA</span>
+        <span style="background:#1c4056; padding:4px 10px; border-radius:30px; font-size:12px;"><i class="fas fa-store"></i> LOJA</span>
+      </div>
+    </div>
+
+    <!-- AÇÃO -->
+    <div class="action-buttons">
+      <button class="btn btn-primary"><i class="fas fa-wave-square"></i> ENTRAR NO LINEUP</button>
+      <button class="btn"><i class="fas fa-map-pin"></i> PICO</button>
+    </div>
+
+    <!-- LOCAL + CONDIÇÕES -->
+    <div class="local-card">
+      <div class="local-titulo">
+        <span><i class="fas fa-map-marker-alt"></i> BALNEÁRIO RINCÃO · SANTA CATARINA, BRASIL</span>
+        <span><i class="fas fa-cloud-sun"></i> LIMPO</span>
+      </div>
+      <div class="condicoes-grid">
+        <div class="cond-item"><i class="fas fa-wind"></i> ONSHORE <strong>8 KTs</strong></div>
+        <div class="cond-item"><i class="fas fa-water"></i> SWELL <strong>1.8-2.2m</strong></div>
+        <div class="cond-item"><i class="fas fa-clock"></i> PERÍODO <strong>12s</strong></div>
+        <div class="cond-item"><i class="fas fa-arrow-down"></i> MARÉ <strong>1.2m</strong></div>
+        <div class="cond-item"><i class="fas fa-thermometer-half"></i> ÁGUA <strong>22°C</strong></div>
+        <div class="cond-item"><i class="fas fa-sun"></i> CLIMA <strong>LIMPO</strong></div>
+      </div>
+      <div class="link-ver"><i class="fas fa-chevron-circle-right"></i> VER CONDIÇÕES COMPLETAS</div>
+    </div>
+
+    <!-- MODOS -->
+    <div class="modos-grid">
+      <div class="modo-item"><h4><i class="fas fa-users"></i> LINEUP ONLINE</h4><p>Entre no mar com outros surfistas em tempo real.</p></div>
+      <div class="modo-item"><h4><i class="fas fa-flag"></i> COMPETIÇÃO</h4><p>Mostre seu talento em baterias oficiais.</p></div>
+      <div class="modo-item"><h4><i class="fas fa-person-swimming"></i> FREE SURF</h4><p>Sem regras. Apenas você e o mar.</p></div>
+      <div class="modo-item"><h4><i class="fas fa-palette"></i> CRIADOR DE ONDAS</h4><p>Crie ondas perfeitas e compartilhe.</p></div>
+    </div>
+
+    <!-- PRANCHA -->
+    <div class="prancha-card">
+      <div class="prancha-header">
+        <span><i class="fas fa-surfing"></i> SHARP EYE - INFERNO 72</span>
+        <span style="color:#79bce6; font-size:13px;"><i class="fas fa-cog"></i> VER EQUIP.</span>
+      </div>
+      <div class="prancha-atributos">
+        <span><i class="fas fa-gauge-high"></i> VELOCIDADE</span>
+        <span><i class="fas fa-arrow-up"></i> FLUTUAÇÃO</span>
+        <span><i class="fas fa-bolt"></i> RESPONSIVIDADE</span>
+        <span><i class="fas fa-sliders"></i> CONTROLE</span>
+      </div>
+    </div>
+
+    <!-- DESAFIOS -->
+    <div class="desafios">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span style="font-weight:600;"><i class="fas fa-calendar-day"></i> DESAFIOS DIÁRIOS</span>
+        <span style="color:#f7c948;">+1.500 XP</span>
+      </div>
+      <div class="desafio-item">
+        <div class="desafio-info">
+          <span class="desafio-nome">Surfe 5 ondas perfeitas</span>
+          <span class="desafio-progresso">3/5 · XP 1.000</span>
+        </div>
+        <div style="background:#1f4a5e; width:60px; height:6px; border-radius:10px;"><div style="width:60%; background:#47b5ff; height:6px; border-radius:10px;"></div></div>
+      </div>
+      <div class="desafio-item">
+        <div class="desafio-info">
+          <span class="desafio-nome">Faça 10 manobras aéreas</span>
+          <span class="desafio-progresso">6/10 · XP 1.000</span>
+        </div>
+        <div style="background:#1f4a5e; width:60px; height:6px; border-radius:10px;"><div style="width:60%; background:#47b5ff; height:6px; border-radius:10px;"></div></div>
+      </div>
+      <div class="desafio-item">
+        <div class="desafio-info">
+          <span class="desafio-nome">Participe de 1 bateria online</span>
+          <span class="desafio-progresso">0/1 · XP 1.500</span>
+        </div>
+        <div style="background:#1f4a5e; width:60px; height:6px; border-radius:10px;"><div style="width:20%; background:#47b5ff; height:6px; border-radius:10px;"></div></div>
+      </div>
+    </div>
+
+    <!-- NOTÍCIAS -->
+    <div class="noticias">
+      <div class="noticia">
+        <span class="noticia-titulo"><i class="fas fa-newspaper"></i> NOVA ATUALIZAÇÃO 1.3</span>
+        <span class="noticia-link">LER MAIS</span>
+      </div>
+      <div class="noticia">
+        <span class="noticia-titulo"><i class="fas fa-microphone"></i> ENTREVISTA: ITALO FERREIRA</span>
+        <span class="noticia-link">ASSISTIR</span>
+      </div>
+      <div style="text-align:right; margin-top:6px; font-size:13px; color:#79bce6;">VER TODAS <i class="fas fa-arrow-right"></i></div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <div class="rodape-links">
+      <span><i class="fas fa-sliders-h"></i> CONFIGURAÇÕES</span>
+      <span><i class="fas fa-question-circle"></i> AJUDA</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // pequena interação para demonstrar navegação (apenas feedback)
+      const buttons = document.querySelectorAll('.btn, .modo-item, .noticia-link, .link-ver, .surfista-card, .prancha-card');
+      buttons.forEach(el => {
+        el.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // feedback visual rápido
+          this.style.transition = 'background 0.1s';
+          this.style.background = '#2a506b';
+          setTimeout(() => {
+            this.style.background = '';
+          }, 150);
+          // exibe um alerta leve apenas para simular ação
+          if (this.classList.contains('btn-primary')) {
+            alert('🌊 Entrando no Lineup Online... (simulação)');
+          } else if (this.classList.contains('modo-item')) {
+            const modo = this.querySelector('h4')?.innerText || 'modo';
+            alert(`🎮 Modo "${modo.trim()}" selecionado (protótipo)`);
+          } else if (this.classList.contains('noticia-link')) {
+            alert('📰 Abrindo notícia... (demo)');
+          } else if (this.classList.contains('link-ver')) {
+            alert('🌤️ Condições completas (simulação)');
+          } else {
+            // ação genérica
+            if (!this.classList.contains('surfista-card') && !this.classList.contains('prancha-card')) {
+              // alert opcional para outros cliques
+            }
+          }
+        });
+      });
+
+      // ícones do header também com feedback
+      document.querySelectorAll('.header-icons i').forEach(ic => {
+        ic.addEventListener('click', function() {
+          alert('🔔 Notificações / Perfil (protótipo)');
+        });
+      });
+      // XP e ranking
+      document.querySelector('.surfista-xp')?.addEventListener('click', function() {
+        alert('⭐ Progresso de XP: 8.450 / 12.000');
+      });
+      // carreira
+      document.querySelector('.carreira-box')?.addEventListener('click', function() {
+        alert('🏆 Temporada 2024 · Ranking CT #12');
+      });
+      // prancha atributos
+      document.querySelector('.prancha-atributos')?.addEventListener('click', function() {
+        alert('🏄 Prancha SHARP EYE - INFERNO 72');
+      });
+    })();
+  </script>
+</body>
+</html>
