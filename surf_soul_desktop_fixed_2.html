@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Surf Soul · Lineup</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a1520;color:#ddeeff;font-size:13px;min-height:100vh;overflow-x:hidden;}
+
+/* ══ TOPNAV ══ */
+.nav{position:fixed;top:0;left:0;right:0;height:54px;background:#070e17;border-bottom:1px solid #162436;display:flex;align-items:center;padding:0 20px;z-index:300;}
+.nav-logo{display:flex;align-items:center;gap:10px;min-width:200px;}
+.nav-logo-circle{width:36px;height:36px;border-radius:50%;border:2px solid #2a4a62;display:flex;align-items:center;justify-content:center;background:#0d1e2e;}
+.nav-logo-circle i{color:#00d4aa;font-size:14px;}
+.nav-logo-txt strong{display:block;font-size:14px;font-weight:900;letter-spacing:2px;color:#fff;}
+.nav-logo-txt span{font-size:8px;letter-spacing:3px;color:#4a7a94;}
+.nav-menu{display:flex;align-items:center;gap:2px;flex:1;padding:0 16px;}
+.nav-menu a{padding:6px 14px;font-size:12px;font-weight:700;color:#4a7a94;text-decoration:none;letter-spacing:.5px;border-bottom:2px solid transparent;transition:.15s;}
+.nav-menu a.on{color:#fff;border-bottom-color:#00d4aa;}
+.nav-menu a:hover{color:#c0dff0;}
+.nav-r{display:flex;align-items:center;gap:12px;}
+.nav-ico{width:34px;height:34px;border-radius:50%;background:#0d1e2e;border:1px solid #1e3448;display:flex;align-items:center;justify-content:center;color:#4a7a94;font-size:14px;cursor:pointer;position:relative;}
+.nav-ico .dot{position:absolute;top:-1px;right:-1px;width:8px;height:8px;background:#e03040;border-radius:50%;}
+.xpbadge{display:flex;align-items:center;gap:7px;background:#0d1e2e;border:1px solid #1e3448;border-radius:30px;padding:5px 14px;font-size:13px;font-weight:700;}
+.xpbadge i{color:#f0c030;}
+.userpill{display:flex;align-items:center;gap:8px;background:#0d1e2e;border:1px solid #1e3448;border-radius:30px;padding:3px 14px 3px 3px;cursor:pointer;}
+.userpill-av{width:30px;height:30px;border-radius:50%;overflow:hidden;background:#1a3050;}
+.userpill-av img{width:100%;height:100%;object-fit:cover;}
+.userpill-name{font-size:13px;font-weight:700;color:#fff;}
+.userpill-lvl{font-size:10px;color:#4a7a94;}
+
+/* ══ LAYOUT 3 COLS ══ */
+.page{display:grid;grid-template-columns:208px 1fr 284px;padding-top:54px;min-height:100vh;}
+
+/* ══ LEFT SIDEBAR ══ */
+.lsb{background:#070e17;border-right:1px solid #122030;padding:22px 14px 16px;display:flex;flex-direction:column;gap:20px;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto;}
+
+.lsb-profile{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;}
+.lsb-av-wrap{position:relative;margin-bottom:2px;}
+.lsb-av{width:80px;height:80px;border-radius:50%;border:2px solid #00d4aa;overflow:hidden;background:#1a3050;}
+.lsb-av img{width:100%;height:100%;object-fit:cover;}
+.lsb-lvbadge{position:absolute;bottom:0;right:0;background:#00d4aa;color:#000;font-size:10px;font-weight:900;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.lsb-name{font-size:15px;font-weight:800;color:#fff;}
+.lsb-handle{font-size:11px;color:#4a7a94;}
+
+.lsb-rank{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.lsb-rank-icon{width:28px;height:28px;border-radius:50%;border:1px solid #1e3448;display:flex;align-items:center;justify-content:center;color:#4a7a94;font-size:11px;}
+.lsb-rank-body{}
+.lsb-rank-lbl{font-size:9px;letter-spacing:1px;color:#4a7a94;text-transform:uppercase;}
+.lsb-rank-val{font-size:18px;font-weight:900;color:#00d4aa;line-height:1;}
+.lsb-rank-up{font-size:11px;color:#3ab860;font-weight:700;}
+
+.lsb-sponsors-lbl{font-size:9px;letter-spacing:1px;color:#4a7a94;text-transform:uppercase;margin-bottom:8px;}
+.lsb-sponsors{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.lsb-sp{background:#0d1e2e;border:1px solid #1e3448;border-radius:8px;padding:10px 6px;text-align:center;display:flex;align-items:center;justify-content:center;}
+.lsb-sp-surf{font-size:9px;font-weight:900;letter-spacing:1px;color:#c0d8e8;flex-direction:column;gap:1px;}
+.lsb-sp-surf span{display:block;font-size:7px;letter-spacing:2px;color:#4a7a94;}
+.lsb-sp-fcs{font-size:15px;font-weight:900;color:#e0eef8;font-style:italic;}
+.lsb-sp-oakley{font-size:11px;font-weight:700;color:#c0d8e8;letter-spacing:.5px;}
+.lsb-sp-arr{font-size:16px;color:#4a7a94;}
+
+.lsb-xp{}
+.lsb-xp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.lsb-xp-lbl{font-size:9px;letter-spacing:1px;color:#4a7a94;text-transform:uppercase;}
+.lsb-xp-num{font-size:9px;color:#4a7a94;}
+.lsb-xp-bar{background:#0d1e2e;border-radius:20px;height:5px;margin-bottom:4px;}
+.lsb-xp-fill{width:70%;background:linear-gradient(90deg,#00d4aa,#0aaed8);border-radius:20px;height:5px;}
+.lsb-xp-nums{font-size:10px;color:#4a7a94;}
+
+.lsb-store{background:#0d1e2e;border-radius:12px;overflow:hidden;border:1px solid #1e3448;}
+.lsb-store-img{height:85px;overflow:hidden;position:relative;}
+.lsb-store-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.6);}
+.lsb-store-imgov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(4,10,18,.7));}
+.lsb-store-body{padding:8px 12px;}
+.lsb-store-sub{font-size:9px;letter-spacing:1.5px;color:#4a7a94;text-transform:uppercase;}
+.lsb-store-title{font-size:13px;font-weight:800;color:#fff;}
+.lsb-store-btn{display:block;margin:6px 12px 12px;background:#0a1520;border:1px solid #1e3448;border-radius:6px;padding:7px;text-align:center;font-size:10px;font-weight:700;color:#00d4aa;cursor:pointer;letter-spacing:.3px;}
+
+.lsb-foot{margin-top:auto;display:flex;gap:16px;color:#3a5a72;font-size:11px;}
+.lsb-foot span{cursor:pointer;display:flex;align-items:center;gap:4px;}
+
+/* ══ MAIN ══ */
+.main{padding:16px;display:flex;flex-direction:column;gap:14px;background:#0a1520;}
+
+/* HERO */
+.hero{border-radius:14px;overflow:hidden;position:relative;height:316px;border:1px solid #162436;}
+.hero-photo{position:absolute;inset:0;}
+.hero-photo img{width:100%;height:100%;object-fit:cover;}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,12,22,.05) 0%,rgba(5,12,22,.25) 35%,rgba(5,12,22,.88) 100%);}
+.hero-topleft{position:absolute;top:0;left:0;right:0;padding:18px 22px 0;}
+.hero-live{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.55);border:1px solid #e03040;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px;backdrop-filter:blur(6px);}
+.blink{width:7px;height:7px;background:#e03040;border-radius:50%;animation:bl 1.2s infinite;}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-surfers{position:absolute;top:16px;right:120px;background:rgba(0,0,0,.55);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;backdrop-filter:blur(6px);}
+.hero-body{position:absolute;bottom:0;left:0;right:0;padding:18px 22px;}
+.hero-city{font-size:28px;font-weight:900;letter-spacing:-.5px;text-shadow:0 2px 10px rgba(0,0,0,.8);}
+.hero-sub{display:flex;align-items:center;gap:6px;font-size:12px;color:#90c0d8;margin-bottom:14px;}
+.hero-stats{display:flex;margin-bottom:14px;gap:0;}
+.hs{padding:6px 16px;border-right:1px solid rgba(255,255,255,.1);}
+.hs:first-child{padding-left:0;}
+.hs:last-child{border-right:none;}
+.hs-lbl{font-size:8px;letter-spacing:1.5px;color:#78a8c0;text-transform:uppercase;}
+.hs-val{font-size:18px;font-weight:800;color:#fff;line-height:1.2;}
+.hs-sm{font-size:10px;color:#6090a8;font-weight:400;}
+.hs-sub{font-size:9px;color:#5880a0;}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;}
+.btn-cond{background:rgba(255,255,255,.08);color:#c8e4f4;font-weight:600;font-size:11px;padding:8px 16px;border-radius:7px;border:1px solid rgba(255,255,255,.15);cursor:pointer;backdrop-filter:blur(6px);}
+.btn-enter{background:#00d4aa;color:#001a14;font-weight:900;font-size:13px;padding:10px 26px;border-radius:8px;border:none;cursor:pointer;letter-spacing:.2px;}
+
+/* SECTION HDR */
+.shdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.shdr-title{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#4a7a94;}
+
+/* MODOS GRID */
+.modos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.modo{border-radius:12px;overflow:hidden;border:1px solid #162436;cursor:pointer;transition:.15s;position:relative;height:186px;display:flex;flex-direction:column;justify-content:flex-end;}
+.modo:hover{border-color:#00d4aa;transform:translateY(-2px);}
+.modo-photo{position:absolute;inset:0;}
+.modo-photo img{width:100%;height:100%;object-fit:cover;}
+.modo-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,10,18,.97) 0%,rgba(4,10,18,.5) 55%,rgba(4,10,18,.08) 100%);}
+/* tint colorido por modo */
+.modo-1 .modo-ov{background:linear-gradient(to top,rgba(0,20,40,.97) 0%,rgba(0,20,40,.52) 55%,rgba(0,20,40,.08) 100%);}
+.modo-2 .modo-ov{background:linear-gradient(to top,rgba(4,14,4,.97) 0%,rgba(4,14,4,.52) 55%,rgba(4,14,4,.08) 100%);}
+.modo-3 .modo-ov{background:linear-gradient(to top,rgba(20,10,4,.97) 0%,rgba(20,10,4,.52) 55%,rgba(20,10,4,.08) 100%);}
+.modo-4 .modo-ov{background:linear-gradient(to top,rgba(4,4,20,.97) 0%,rgba(4,4,20,.52) 55%,rgba(4,4,20,.08) 100%);}
+.modo-body{position:relative;z-index:1;padding:12px;}
+.modo-title{font-size:14px;font-weight:900;letter-spacing:.2px;margin-bottom:4px;}
+.modo-desc{font-size:10px;color:#7aa8c0;line-height:1.4;}
+.modo-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:10px;color:#4a7a94;}
+.modo-foot i{color:#00d4aa;font-size:13px;}
+
+/* BOTTOM ROW */
+.bot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+
+/* CARREIRA */
+.carr{border-radius:12px;overflow:hidden;border:1px solid #162436;position:relative;min-height:200px;}
+.carr-photo{position:absolute;inset:0;}
+.carr-photo img{width:100%;height:100%;object-fit:cover;}
+.carr-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,10,18,.98) 0%,rgba(4,10,18,.7) 50%,rgba(4,10,18,.18) 100%);}
+.carr-body{position:relative;z-index:1;padding:14px;display:flex;flex-direction:column;min-height:200px;}
+.carr-season{font-size:9px;letter-spacing:2px;color:#00d4aa;text-transform:uppercase;font-weight:700;margin-bottom:2px;}
+.carr-title{font-size:14px;font-weight:900;margin-bottom:auto;}
+.carr-stats{display:flex;gap:18px;margin-bottom:12px;}
+.carr-s-lbl{font-size:9px;color:#4a7a94;letter-spacing:.4px;text-transform:uppercase;}
+.carr-s-val{font-size:18px;font-weight:900;color:#fff;display:flex;align-items:center;gap:4px;}
+.carr-s-up{font-size:11px;color:#3ab860;}
+.carr-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;padding:7px 16px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;width:fit-content;margin-top:2px;}
+
+/* PRANCHA */
+.prancha{background:#0d1e2e;border-radius:12px;border:1px solid #162436;padding:14px;display:flex;flex-direction:column;}
+.prancha-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.prancha-label{font-size:9px;color:#4a7a94;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;}
+.prancha-name{font-size:11px;font-weight:800;color:#fff;}
+.prancha-link{font-size:10px;color:#00d4aa;cursor:pointer;font-weight:600;}
+.prancha-body{display:flex;gap:14px;flex:1;align-items:center;}
+.prancha-board-wrap{display:flex;justify-content:center;align-items:center;width:56px;}
+.prancha-board{width:26px;height:116px;background:linear-gradient(to bottom,#f2f2f2 0%,#d8d8d8 40%,#b8b8b8 100%);border-radius:13px 13px 6px 6px;box-shadow:2px 4px 16px rgba(0,0,0,.7);}
+.prancha-attrs{flex:1;display:flex;flex-direction:column;gap:9px;}
+.attr-lbl{font-size:9px;color:#4a7a94;letter-spacing:.5px;text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:3px;}
+.attr-val{color:#e8f4ff;font-weight:700;}
+.attr-track{background:#071018;border-radius:10px;height:4px;}
+.attr-fill{border-radius:10px;height:4px;}
+.av{background:linear-gradient(90deg,#00d4aa,#0aaed8);width:87%;}
+.af{background:linear-gradient(90deg,#0aaed8,#3888d8);width:82%;}
+.ar{background:linear-gradient(90deg,#f0c030,#e07830);width:91%;}
+.ac{background:linear-gradient(90deg,#3ab860,#1a9040);width:84%;}
+
+/* DESAFIOS */
+.desaf{background:#0d1e2e;border-radius:12px;border:1px solid #162436;padding:14px;}
+.desaf-item{padding:8px 0;border-bottom:1px solid #122030;display:flex;align-items:center;gap:10px;}
+.desaf-item:last-of-type{border-bottom:none;}
+.desaf-info{flex:1;}
+.desaf-nome{font-size:12px;font-weight:600;color:#c8e0f0;margin-bottom:5px;}
+.desaf-row{display:flex;align-items:center;gap:8px;}
+.desaf-track{flex:1;background:#071018;border-radius:10px;height:4px;}
+.desaf-fill{background:#00d4aa;border-radius:10px;height:4px;}
+.desaf-cnt{font-size:10px;color:#4a7a94;white-space:nowrap;}
+.desaf-xp{font-size:10px;font-weight:700;color:#f0c030;white-space:nowrap;display:flex;align-items:center;gap:3px;}
+.desaf-xp i{font-size:8px;}
+.desaf-ok{color:#3ab860;font-size:12px;}
+.desaf-reset{font-size:10px;color:#4a7a94;margin-top:8px;display:flex;align-items:center;gap:5px;}
+
+/* ══ RIGHT PANEL ══ */
+.rp{background:#070e17;border-left:1px solid #122030;padding:20px 14px 16px;display:flex;flex-direction:column;gap:18px;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto;}
+.rp-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.rp-title{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#4a7a94;}
+.rp-link{font-size:11px;color:#00d4aa;cursor:pointer;}
+
+/* AMIGOS */
+.amigo{display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid #0d1e2e;}
+.amigo:last-child{border-bottom:none;}
+.amigo-av{width:34px;height:34px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#1a3050;}
+.amigo-av img{width:100%;height:100%;object-fit:cover;}
+.amigo-info{flex:1;}
+.amigo-name{font-size:12px;font-weight:700;color:#c8e0f0;}
+.amigo-st{font-size:10px;color:#4a7a94;}
+.abtn{font-size:10px;font-weight:800;padding:5px 13px;border-radius:6px;border:none;cursor:pointer;letter-spacing:.3px;}
+.abt-in{background:#00d4aa;color:#001a14;}
+.abt-watch{background:rgba(10,174,216,.12);color:#0aaed8;border:1px solid rgba(10,174,216,.3)!important;}
+
+/* EVENTOS */
+.ev{background:#0d1e2e;border-radius:10px;border:1px solid #162436;overflow:hidden;margin-bottom:8px;}
+.ev:last-child{margin-bottom:0;}
+.ev-photo{height:72px;overflow:hidden;position:relative;}
+.ev-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.6);}
+.ev-photo-ov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(4,10,18,.5));}
+.ev-badge{position:absolute;top:6px;right:6px;background:#e03040;font-size:8px;font-weight:900;padding:3px 8px;border-radius:10px;letter-spacing:.5px;display:flex;align-items:center;gap:4px;}
+.ev-body{padding:8px 10px;}
+.ev-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:#fff;}
+.ev-local{font-size:10px;color:#4a7a94;margin-bottom:4px;}
+.ev-foot{display:flex;justify-content:space-between;align-items:center;}
+.ev-timer{font-size:10px;color:#00d4aa;font-weight:700;}
+.ev-cd{font-size:16px;font-weight:900;color:#fff;letter-spacing:.5px;}
+.evbtn{font-size:10px;font-weight:800;padding:5px 13px;border-radius:6px;border:none;cursor:pointer;letter-spacing:.3px;}
+.evbt-watch{background:rgba(224,48,64,.12);color:#e03040;border:1px solid rgba(224,48,64,.3)!important;}
+.evbt-join{background:#00d4aa;color:#001a14;}
+
+/* NOTICIAS */
+.noticia{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #0d1e2e;}
+.noticia:last-child{border-bottom:none;}
+.noticia-thumb{width:52px;height:42px;border-radius:6px;overflow:hidden;flex-shrink:0;}
+.noticia-thumb img{width:100%;height:100%;object-fit:cover;filter:brightness(.75);}
+.noticia-info{flex:1;}
+.noticia-title{font-size:11px;font-weight:800;color:#c8e0f0;line-height:1.3;margin-bottom:2px;}
+.noticia-desc{font-size:10px;color:#4a7a94;line-height:1.3;}
+.noticia-link{font-size:10px;color:#00d4aa;cursor:pointer;font-weight:700;display:block;margin-top:3px;}
+
+/* RODAPÉ MAIN */
+.main-foot{display:flex;justify-content:space-between;align-items:center;padding:6px 0;color:#3a5a72;font-size:10px;}
+.main-foot-brand{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.main-foot-brand-logo{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:900;color:#4a7a94;letter-spacing:1px;}
+.main-foot-brand-sub{font-size:8px;letter-spacing:2px;color:#2a4a5e;}
+.main-foot-ver{font-size:10px;letter-spacing:.5px;}
+
+/* RODAPÉ RIGHT */
+.rp-foot{margin-top:auto;display:flex;justify-content:center;gap:18px;color:#3a5a72;font-size:18px;}
+.rp-foot i{cursor:pointer;transition:.15s;}
+.rp-foot i:hover{color:#00d4aa;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:#0d1e2e;color:#c8e8ff;padding:9px 22px;border-radius:40px;font-size:12px;font-weight:700;border:1px solid #00d4aa;box-shadow:0 8px 28px rgba(0,0,0,.6);transition:transform .25s cubic-bezier(.3,1.5,.6,1);z-index:999;white-space:nowrap;}
+.toast.on{transform:translateX(-50%) translateY(0);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:#162436;border-radius:3px;}
+</style>
+
+<style>
+  html { min-width: 1280px; }
+  body { min-width: 1280px; zoom: 1; -moz-transform: scale(1); }
+  @media (max-width: 1280px) {
+    html { transform-origin: top left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-circle"><i class="fas fa-water"></i></div>
+    <div class="nav-logo-txt"><strong>SURF SOUL</strong><span>LINEUP ✦</span></div>
+  </div>
+  <div class="nav-menu">
+    <a class="on" href="#">HOME</a>
+    <a href="#" onclick="tt('🎮 Jogar')">JOGAR</a>
+    <a href="#" onclick="tt('🏆 Carreira')">CARREIRA</a>
+    <a href="#" onclick="tt('🏄 Equipamento')">EQUIPAMENTO</a>
+    <a href="#" onclick="tt('🛒 Loja')">LOJA</a>
+    <a href="#" onclick="tt('👥 Social')">SOCIAL</a>
+    <a href="#" onclick="tt('📺 Surf TV')">SURF TV</a>
+    <a href="#" onclick="tt('🏁 Score')">SCORE</a>
+  </div>
+  <div class="nav-r">
+    <div class="nav-ico" onclick="tt('🔔 Notificações')"><i class="fas fa-bell"></i><span class="dot"></span></div>
+    <div class="nav-ico" onclick="tt('✉️ Mensagens')"><i class="fas fa-envelope"></i></div>
+    <div class="xpbadge"><i class="fas fa-star"></i> 12.450</div>
+    <div class="userpill" onclick="tt('👤 Marcos Soul · Nível 23')">
+      <div class="userpill-av">
+        <img src="https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=60&h=60&fit=crop&crop=face" onerror="this.style.display='none'" alt="">
+      </div>
+      <div><div class="userpill-name">Marcos</div><div class="userpill-lvl">Nível 23</div></div>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ══ LEFT SIDEBAR ══ -->
+<aside class="lsb">
+  <div class="lsb-profile">
+    <div class="lsb-av-wrap">
+      <div class="lsb-av">
+        <img src="https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=160&h=160&fit=crop&crop=face" onerror="this.parentElement.innerHTML='🏄'" alt="Marcos Soul">
+      </div>
+      <div class="lsb-lvbadge">23</div>
+    </div>
+    <div class="lsb-name">Marcos Soul</div>
+    <div class="lsb-handle">@marcossoul</div>
+  </div>
+
+  <div class="lsb-rank">
+    <div class="lsb-rank-icon"><i class="fas fa-globe-americas"></i></div>
+    <div class="lsb-rank-body">
+      <div class="lsb-rank-lbl">RANKING MUNDIAL</div>
+      <div class="lsb-rank-val">#1.248</div>
+      <div class="lsb-rank-up"><i class="fas fa-arrow-up"></i> 85</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="lsb-sponsors-lbl">PATROCINADORES</div>
+    <div class="lsb-sponsors">
+      <div class="lsb-sp lsb-sp-surf" style="flex-direction:column;gap:1px;">
+        <span style="font-size:9px;font-weight:900;letter-spacing:1px;color:#c0d8e8;">SURF SOUL</span>
+        <span style="font-size:7px;letter-spacing:2px;color:#4a7a94;">CO.</span>
+      </div>
+      <div class="lsb-sp"><span class="lsb-sp-fcs">FCS</span></div>
+      <div class="lsb-sp"><span class="lsb-sp-oakley">OAKLEY</span></div>
+      <div class="lsb-sp"><span class="lsb-sp-arr"><i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></span></div>
+    </div>
+  </div>
+
+  <div class="lsb-xp">
+    <div class="lsb-xp-top">
+      <span class="lsb-xp-lbl">PRÓXIMO NÍVEL 24</span>
+      <span class="lsb-xp-num">24</span>
+    </div>
+    <div class="lsb-xp-bar"><div class="lsb-xp-fill"></div></div>
+    <div class="lsb-xp-nums">8.450 / 12.000 XP</div>
+  </div>
+
+  <div class="lsb-store">
+    <div class="lsb-store-img">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=160&fit=crop" onerror="this.style.display='none'" alt="Drop 08">
+      <div class="lsb-store-imgov"></div>
+    </div>
+    <div class="lsb-store-body">
+      <div class="lsb-store-sub">NOVA COLEÇÃO</div>
+      <div class="lsb-store-title">DROP 08</div>
+    </div>
+    <div class="lsb-store-btn" onclick="tt('🛒 Abrindo loja...')">VER NA LOJA</div>
+  </div>
+
+  <div class="lsb-foot">
+    <span onclick="tt('⚙️ Configurações')"><i class="fas fa-cog"></i> CONFIGURAÇÕES</span>
+    <span onclick="tt('❓ Ajuda')"><i class="fas fa-question-circle"></i> AJUDA</span>
+  </div>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1400&h=700&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1400&h=700&fit=crop'" alt="Balneário Rincão">
+    </div>
+    <div class="hero-ov"></div>
+    <div class="hero-live"><div class="blink"></div> AO VIVO</div>
+    <div class="hero-surfers"><i class="fas fa-circle" style="color:#e03040;font-size:7px;"></i> 37 SURFISTAS NA ÁGUA</div>
+    <div class="hero-body">
+      <div class="hero-city">BALNEÁRIO RINCÃO</div>
+      <div class="hero-sub">🇧🇷 Santa Catarina, Brasil</div>
+      <div class="hero-stats">
+        <div class="hs">
+          <div class="hs-lbl">ONSHORE</div>
+          <div class="hs-val">8 <span class="hs-sm">KTS</span></div>
+          <div class="hs-sub">12s</div>
+        </div>
+        <div class="hs">
+          <div class="hs-lbl">SWELL</div>
+          <div class="hs-val">1.8 - 2.2m</div>
+        </div>
+        <div class="hs">
+          <div class="hs-lbl">↑ PERÍODO</div>
+          <div class="hs-val">12 <span class="hs-sm">S</span></div>
+        </div>
+        <div class="hs">
+          <div class="hs-lbl">MARÉ ↑</div>
+          <div class="hs-val">1.2m</div>
+          <div class="hs-sub">07:45</div>
+        </div>
+        <div class="hs">
+          <div class="hs-lbl">ÁGUA ↑</div>
+          <div class="hs-val">22°C</div>
+        </div>
+        <div class="hs">
+          <div class="hs-lbl">· CLIMA</div>
+          <div class="hs-val">☀️</div>
+          <div class="hs-sub">LIMPO</div>
+        </div>
+      </div>
+      <div class="hero-row">
+        <button class="btn-cond" onclick="tt('🌤️ Forecast completo: ondas até 11h')">VER CONDIÇÕES COMPLETAS</button>
+        <button class="btn-enter" onclick="tt('🌊 Entrando no Lineup — 37 surfistas!')">ENTRAR NO LINEUP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODOS -->
+  <div>
+    <div class="shdr"><span class="shdr-title">ESCOLHA SEU MODO</span></div>
+    <div class="modos">
+      <!-- LINEUP ONLINE -->
+      <div class="modo modo-1" onclick="tt('👥 Lineup Online · 14 surfistas agora')">
+        <div class="modo-photo"><img src="https://images.unsplash.com/photo-1455680231598-a61bcd1ef7bf?w=400&h=300&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=300&fit=crop'" alt="Lineup"></div>
+        <div class="modo-ov"></div>
+        <div class="modo-body">
+          <div class="modo-title">LINEUP ONLINE</div>
+          <div class="modo-desc">Entre no mar com outros surfistas em tempo real.</div>
+          <div class="modo-foot"><span><i class="fas fa-globe" style="font-size:10px;color:#4a7a94;margin-right:3px;"></i> 12-16 JOGADORES</span><i class="fas fa-globe"></i></div>
+        </div>
+      </div>
+      <!-- COMPETIÇÃO -->
+      <div class="modo modo-2" onclick="tt('🏁 Competição · Próxima bateria em 12min')">
+        <div class="modo-photo"><img src="https://images.unsplash.com/photo-1531722569936-825d4eea6ae3?w=400&h=300&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=300&fit=crop'" alt="Competição"></div>
+        <div class="modo-ov"></div>
+        <div class="modo-body">
+          <div class="modo-title">COMPETIÇÃO</div>
+          <div class="modo-desc">Mostre seu talento em baterias oficiais e suba no ranking.</div>
+          <div class="modo-foot"><span><i class="fas fa-users" style="font-size:10px;color:#4a7a94;margin-right:3px;"></i> 1-8 atletas</span><i class="fas fa-trophy"></i></div>
+        </div>
+      </div>
+      <!-- FREE SURF -->
+      <div class="modo modo-3" onclick="tt('🌊 Free Surf · Sem regras, só ondas')">
+        <div class="modo-photo"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=300&fit=crop'" alt="Free Surf"></div>
+        <div class="modo-ov"></div>
+        <div class="modo-body">
+          <div class="modo-title">FREE SURF</div>
+          <div class="modo-desc">Sem regras. Apenas você e o mar.</div>
+          <div class="modo-foot"><span></span><i class="fas fa-person-swimming"></i></div>
+        </div>
+      </div>
+      <!-- CRIADOR DE ONDAS -->
+      <div class="modo modo-4" onclick="tt('🎨 Criador de Ondas · Beta em breve!')">
+        <div class="modo-photo"><img src="https://images.unsplash.com/photo-1509914398892-963f53e6e2f1?w=400&h=300&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=300&fit=crop'" alt="Criador"></div>
+        <div class="modo-ov"></div>
+        <div class="modo-body">
+          <div class="modo-title">CRIADOR DE ONDAS</div>
+          <div class="modo-desc">Crie ondas perfeitas e compartilhe com a comunidade.</div>
+          <div class="modo-foot"><span></span><i class="fas fa-sliders"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW -->
+  <div class="bot">
+    <!-- CARREIRA -->
+    <div class="carr">
+      <div class="carr-photo"><img src="https://images.unsplash.com/photo-1530870110042-98b2cb110834?w=500&h=350&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=500&h=350&fit=crop'" alt="Carreira"></div>
+      <div class="carr-ov"></div>
+      <div class="carr-body">
+        <div style="flex:1;"></div>
+        <div>
+          <div class="carr-season">TEMPORADA 2024</div>
+          <div class="carr-title">CARREIRA</div>
+          <div class="carr-stats">
+            <div>
+              <div class="carr-s-lbl">RANKING CT</div>
+              <div class="carr-s-val">#12 <span class="carr-s-up">↑ 3</span></div>
+            </div>
+            <div>
+              <div class="carr-s-lbl">PONTOS</div>
+              <div class="carr-s-val">12.450</div>
+            </div>
+          </div>
+          <button class="carr-btn" onclick="tt('🏆 Temporada 2024 · Ver detalhes')">VER TEMPORADA</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRANCHA -->
+    <div class="prancha">
+      <div class="prancha-hdr">
+        <div>
+          <div class="prancha-label">PRANCHA ATUAL</div>
+          <div class="prancha-name">SHARP EYE - INFERNO 72</div>
+        </div>
+        <div class="prancha-link" onclick="tt('🏄 Ver equipamento completo')">VER EQUIPAMENTO</div>
+      </div>
+      <div class="prancha-body">
+        <div class="prancha-board-wrap"><div class="prancha-board"></div></div>
+        <div class="prancha-attrs">
+          <div>
+            <div class="attr-lbl">VELOCIDADE <span class="attr-val">8.7</span></div>
+            <div class="attr-track"><div class="attr-fill av"></div></div>
+          </div>
+          <div>
+            <div class="attr-lbl">FLUTUAÇÃO <span class="attr-val">8.2</span></div>
+            <div class="attr-track"><div class="attr-fill af"></div></div>
+          </div>
+          <div>
+            <div class="attr-lbl">RESPONSIVIDADE <span class="attr-val">9.1</span></div>
+            <div class="attr-track"><div class="attr-fill ar"></div></div>
+          </div>
+          <div>
+            <div class="attr-lbl">CONTROLE <span class="attr-val">8.4</span></div>
+            <div class="attr-track"><div class="attr-fill ac"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESAFIOS -->
+    <div class="desaf">
+      <div class="shdr" style="margin-bottom:8px;">
+        <span class="shdr-title"><i class="fas fa-calendar-day"></i> DESAFIOS DIÁRIOS</span>
+      </div>
+      <div class="desaf-item">
+        <div class="desaf-info">
+          <div class="desaf-nome">Surfe 5 ondas perfeitas</div>
+          <div class="desaf-row">
+            <div class="desaf-track"><div class="desaf-fill" style="width:60%;"></div></div>
+            <span class="desaf-cnt">3/5</span>
+          </div>
+        </div>
+        <div class="desaf-xp"><i class="fas fa-star"></i> 1.000</div>
+      </div>
+      <div class="desaf-item">
+        <div class="desaf-info">
+          <div class="desaf-nome">Faça 10 manobras aéreas</div>
+          <div class="desaf-row">
+            <div class="desaf-track"><div class="desaf-fill" style="width:60%;"></div></div>
+            <span class="desaf-cnt">6/10</span>
+          </div>
+        </div>
+        <div class="desaf-xp"><i class="fas fa-star"></i> 1.000</div>
+      </div>
+      <div class="desaf-item">
+        <div class="desaf-info">
+          <div class="desaf-nome">Participe de 1 bateria online</div>
+          <div class="desaf-row">
+            <div class="desaf-track"><div class="desaf-fill" style="width:100%;background:#3ab860;"></div></div>
+            <span class="desaf-ok">✓</span>
+          </div>
+        </div>
+        <div class="desaf-xp"><i class="fas fa-star"></i> 1.500</div>
+      </div>
+      <div class="desaf-reset"><i class="fas fa-clock"></i> REINICIA EM: <span id="cd" style="color:#fff;font-weight:800;margin-left:3px;">08:45:12</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN FOOTER -->
+  <div class="main-foot">
+    <div style="font-size:10px;color:#2a4a5e;">⚙ CONFIGURAÇÕES &nbsp;&nbsp; ? AJUDA</div>
+    <div class="main-foot-brand">
+      <div class="main-foot-brand-logo"><i class="fas fa-water" style="color:#00d4aa;"></i> SURF SOUL</div>
+      <div class="main-foot-brand-sub">COMMUNITY / CULTURE / CONNECTION</div>
+    </div>
+    <div class="main-foot-ver">VERSÃO 1.3.0</div>
+  </div>
+
+</main>
+
+<!-- ══ RIGHT PANEL ══ -->
+<aside class="rp">
+
+  <!-- AMIGOS -->
+  <div>
+    <div class="rp-hdr"><span class="rp-title">AMIGOS ONLINE</span><span class="rp-link" onclick="tt('👥 Ver todos')">VER TODOS</span></div>
+    <div class="amigo">
+      <div class="amigo-av"><img src="https://i.pravatar.cc/68?img=11" onerror="this.style.display='none'" alt="Caio"></div>
+      <div class="amigo-info"><div class="amigo-name">Caio Ribeiro</div><div class="amigo-st">No Lineup</div></div>
+      <button class="abtn abt-in" onclick="tt('🌊 Entrando com Caio!')">ENTRAR</button>
+    </div>
+    <div class="amigo">
+      <div class="amigo-av"><img src="https://i.pravatar.cc/68?img=47" onerror="this.style.display='none'" alt="Jess"></div>
+      <div class="amigo-info"><div class="amigo-name">Jess Pontes</div><div class="amigo-st">Free Surf – Teahupoo</div></div>
+      <button class="abtn abt-in" onclick="tt('🌊 Entrando com Jess!')">ENTRAR</button>
+    </div>
+    <div class="amigo">
+      <div class="amigo-av"><img src="https://i.pravatar.cc/68?img=12" onerror="this.style.display='none'" alt="Miguel"></div>
+      <div class="amigo-info"><div class="amigo-name">Miguel Pupo</div><div class="amigo-st">Competição – JBay</div></div>
+      <button class="abtn abt-watch" onclick="tt('📺 Assistindo Miguel!')">ASSISTIR</button>
+    </div>
+    <div class="amigo">
+      <div class="amigo-av"><img src="https://i.pravatar.cc/68?img=49" onerror="this.style.display='none'" alt="Tainá"></div>
+      <div class="amigo-info"><div class="amigo-name">Tainá Hinckel</div><div class="amigo-st">Free Surf – Rincão</div></div>
+      <button class="abtn abt-in" onclick="tt('🌊 Entrando com Tainá!')">ENTRAR</button>
+    </div>
+    <div class="amigo">
+      <div class="amigo-av"><img src="https://i.pravatar.cc/68?img=15" onerror="this.style.display='none'" alt="Filipe"></div>
+      <div class="amigo-info"><div class="amigo-name">Filipe Toledo</div><div class="amigo-st">No Menu</div></div>
+      <button class="abtn abt-in" onclick="tt('👤 Filipe no menu')">ENTRAR</button>
+    </div>
+  </div>
+
+  <!-- EVENTOS -->
+  <div>
+    <div class="rp-hdr"><span class="rp-title">EVENTOS AO VIVO</span><span class="rp-link" onclick="tt('📅 Ver todos os eventos')">VER TODOS</span></div>
+    <div class="ev">
+      <div class="ev-photo">
+        <img src="https://images.unsplash.com/photo-1509914398892-963f53e6e2f1?w=280&h=140&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=280&h=140&fit=crop'" alt="WSL">
+        <div class="ev-photo-ov"></div>
+        <div class="ev-badge"><div class="blink"></div> AO VIVO</div>
+      </div>
+      <div class="ev-body">
+        <div class="ev-name">WSL CHAMPIONSHIP TOUR</div>
+        <div class="ev-local">Pipeline, Hawaii</div>
+        <div class="ev-foot"><div></div><button class="evbtn evbt-watch" onclick="tt('📺 Assistindo WSL!')">ASSISTIR</button></div>
+      </div>
+    </div>
+    <div class="ev">
+      <div class="ev-photo">
+        <img src="https://images.unsplash.com/photo-1455680231598-a61bcd1ef7bf?w=280&h=140&fit=crop" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=280&h=140&fit=crop'" alt="Rincão">
+        <div class="ev-photo-ov"></div>
+      </div>
+      <div class="ev-body">
+        <div class="ev-name">SURF SOUL PRO RINCÃO</div>
+        <div class="ev-local">Balneário Rincão, SC</div>
+        <div class="ev-foot">
+          <div><div class="ev-timer">COMEÇA EM 2H</div><div class="ev-cd" id="ecd">02:15:42</div></div>
+          <button class="evbtn evbt-join" onclick="tt('🏁 Inscrito! Surf Soul Pro Rincão')">PARTICIPAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTICIAS -->
+  <div>
+    <div class="rp-hdr"><span class="rp-title">NOTÍCIAS</span><span class="rp-link" onclick="tt('📰 Ver todas')">VER TODAS</span></div>
+    <div class="noticia">
+      <div class="noticia-thumb"><img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=100&h=80&fit=crop" alt=""></div>
+      <div class="noticia-info">
+        <div class="noticia-title">NOVA ATUALIZAÇÃO 1.3</div>
+        <div class="noticia-desc">Melhorias na física das ondas e novos movimentos.</div>
+        <span class="noticia-link" onclick="tt('📰 Atualização 1.3...')">LER MAIS</span>
+      </div>
+    </div>
+    <div class="noticia">
+      <div class="noticia-thumb"><img src="https://images.unsplash.com/photo-1531722569936-825d4eea6ae3?w=100&h=80&fit=crop" alt=""></div>
+      <div class="noticia-info">
+        <div class="noticia-title">ENTREVISTA: ITALO FERREIRA</div>
+        <div class="noticia-desc">Bicampeão mundial fala sobre treinos e preparação.</div>
+        <span class="noticia-link" onclick="tt('🎥 Entrevista: Italo...')">ASSISTIR</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- REDES -->
+  <div class="rp-foot">
+    <i class="fab fa-instagram" onclick="tt('📸 Instagram')"></i>
+    <i class="fab fa-youtube" onclick="tt('▶️ YouTube')"></i>
+    <i class="fab fa-tiktok" onclick="tt('🎵 TikTok')"></i>
+    <i class="fab fa-discord" onclick="tt('💬 Discord')"></i>
+  </div>
+
+</aside>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function tt(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('on');clearTimeout(window._t);window._t=setTimeout(()=>e.classList.remove('on'),2200);}
+// countdown desafio
+let s=8*3600+45*60+12;
+const cdEl=document.getElementById('cd');
+setInterval(()=>{s=s<=0?86400:s-1;cdEl.textContent=pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60);},1000);
+// countdown evento
+let es=2*3600+15*60+42;
+const ecdEl=document.getElementById('ecd');
+setInterval(()=>{if(es<=0){ecdEl.textContent='AO VIVO!';return;}es--;ecdEl.textContent=pad(Math.floor(es/3600))+':'+pad(Math.floor(es%3600/60))+':'+pad(es%60);},1000);
+function pad(n){return String(n).padStart(2,'0');}
+</script>
+</body>
+</html>
